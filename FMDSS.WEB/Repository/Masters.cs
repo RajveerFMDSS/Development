@@ -80,8 +80,7 @@ namespace FMDSS.WEB.Repository
                     string str = response.Content.ReadAsStringAsync().Result;
                     model = Newtonsoft.Json.JsonConvert.DeserializeObject<DropDownResponse>(str);
                 }
-                string message = response.Content.ReadAsStringAsync().Result;
-                System.Console.WriteLine("URL responese : " + message);
+                
             }
 
             return model;
@@ -102,8 +101,7 @@ namespace FMDSS.WEB.Repository
                     string str =response.Content.ReadAsStringAsync().Result;
                     model = Newtonsoft.Json.JsonConvert.DeserializeObject<DropDownResponse>(str);
                 }
-                string message = response.Content.ReadAsStringAsync().Result;
-                System.Console.WriteLine("URL responese : " + message);
+                
             }
 
             return model;
@@ -127,8 +125,6 @@ namespace FMDSS.WEB.Repository
                     model = Newtonsoft.Json.JsonConvert.DeserializeObject<DropDownResponse>(str);
 
                 }
-                string message = response.Content.ReadAsStringAsync().Result;
-                System.Console.WriteLine("URL responese : " + message);
             }
 
             return model;

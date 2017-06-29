@@ -114,410 +114,417 @@
                 </div>
 
                 <div class="body">
-                    @using (Ajax.BeginForm("SaveNocInformation", "NOCModule", new AjaxOptions { HttpMethod = "post", OnSuccess = "Success", OnBegin = "hello();", OnFailure = "Failure", OnComplete = "Complete" }, new { id = "wizard_with_validation", @class = "dropzone dz-clickable", enctype = "multipart/form-data", data_behavior = "confirm" }))
+                    @using (Ajax.BeginForm("SaveNocInformation", "NOCModule", new AjaxOptions { HttpMethod = "post", OnSuccess = "Success", OnBegin = "Begin", OnFailure = "Failure", OnComplete = "Complete" }, new { id = "wizard_with_validation", enctype = "multipart/form-data", data_behavior = "confirm" }))
                     {
-                    <h3>GIS Information</h3>
-                    <fieldset>
-                        <div class="col-sm-6">
-                            <div class="form-group form-float">
-                                <div class="">
-                                    @Html.DropDownListFor(model => model.GISInfo.NOCPurpose, (IEnumerable<SelectListItem>)TempData["FixedLandNocTypeList"], "--Select--", new { @class = "form-control show-tick", @id = "NOCPurpose", @required = "required" })
+                        <h3>GIS Information</h3>
+                        <fieldset>
+                            <div class="col-sm-6">
+                                <div class="form-group form-float">
+                                    <div class="">
+                                        @Html.DropDownListFor(model => model.GISInfo.NOCPurpose, (IEnumerable<SelectListItem>)TempData["FixedLandNocTypeList"], "--Select--", new { @class = "form-control show-tick", @id = "NOCPurpose", @required = "required" })
+                                    </div>
+
                                 </div>
-
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group form-float">
-                                <div class="">
-                                    @Html.DropDownListFor(model => model.GISInfo.NOCType, (IEnumerable<SelectListItem>)TempData["FixedLandPermissionTypesList"], "--Select--", new { @class = "form-control show-tick", @id = "NOCType", @required = "required" })
+                            <div class="col-sm-6">
+                                <div class="form-group form-float">
+                                    <div class="">
+                                        @Html.DropDownListFor(model => model.GISInfo.NOCType, (IEnumerable<SelectListItem>)TempData["FixedLandPermissionTypesList"], "--Select--", new { @class = "form-control show-tick", @id = "NOCType", @required = "required" })
+                                    </div>
+
                                 </div>
-
                             </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group form-float">
+                            <div class="col-sm-12">
+                                <div class="form-group form-float">
 
-                            </div>
-                        </div>
-                        <div class="col-sm-1">
-                            <div class="form-group form-float">
-                                <div class="form">
-
-                                    <button class="btn btn-warning waves-effect" id="submitbtn" onclick="GetGISInfo();" type="button">Upload</button>
                                 </div>
-
                             </div>
-                        </div>
-                        <div class="col-sm-11">
-                            <div class="form-group form-float">
-                                <div class="form">
-                                    All details will be generated automatically by uploading KML file, Applicant will enter only Khasra number(s).
+                            <div class="col-sm-1">
+                                <div class="form-group form-float">
+                                    <div class="form">
+
+                                        <button class="btn btn-warning waves-effect" id="submitbtn" onclick="GetGISInfo();" type="button">Upload</button>
+                                    </div>
+
                                 </div>
-
                             </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="row clearfix">
-                                <table class="table table-bordered table-striped table-hover dataTable js-exportable responsive-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Division</th>
-                                            <th>District</th>
-                                            <th>Tehsil</th>
-                                            <th>Panchayat Samiti</th>
-                                            <th>Gram Panchayat</th>
-                                            <th>Village	</th>
-                                            <th>Name of Area</th>
-                                            <th>Khasra No.</th>
-                                        </tr>
-                                    </thead>
+                            <div class="col-sm-11">
+                                <div class="form-group form-float">
+                                    <div class="form">
+                                        All details will be generated automatically by uploading KML file, Applicant will enter only Khasra number(s).
+                                    </div>
 
-                                    <tbody>
-                                        @for (int i = 0; i < Model.GISInfo.GISList.Count; i++)
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="row clearfix">
+                                    <table class="table table-bordered table-striped table-hover dataTable js-exportable responsive-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Division</th>
+                                                <th>District</th>
+                                                <th>Tehsil</th>
+                                                <th>Panchayat Samiti</th>
+                                                <th>Gram Panchayat</th>
+                                                <th>Village	</th>
+                                                <th>Name of Area</th>
+                                                <th>Khasra No.</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @for (int i = 0; i < Model.GISInfo.GISList.Count; i++)
                                             {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(model => Model.GISInfo.GISList[i].Div_NM)
-                                                @Html.HiddenFor(model => Model.GISInfo.GISList[i].Div_Cd)
-                                                @Html.HiddenFor(model => Model.GISInfo.GISList[i].FOREST_DIVCODE)
-                                                @Html.HiddenFor(model => Model.GISInfo.GISList[i].FOREST_RANGECODE)
-                                            </td>
-                                            <td>
-                                                @Html.HiddenFor(model => Model.GISInfo.GISList[i].Dist_Cd)
-                                                @Html.DisplayFor(model => Model.GISInfo.GISList[i].Dist_NM)
-                                            </td>
-                                            <td>
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(model => Model.GISInfo.GISList[i].Div_NM)
+                                                        @Html.HiddenFor(model => Model.GISInfo.GISList[i].Div_Cd)
+                                                        @Html.HiddenFor(model => Model.GISInfo.GISList[i].FOREST_DIVCODE)
+                                                        @Html.HiddenFor(model => Model.GISInfo.GISList[i].FOREST_RANGECODE)
+                                                    </td>
+                                                    <td>
+                                                        @Html.HiddenFor(model => Model.GISInfo.GISList[i].Dist_Cd)
+                                                        @Html.DisplayFor(model => Model.GISInfo.GISList[i].Dist_NM)
+                                                    </td>
+                                                    <td>
 
-                                                @Html.HiddenFor(model => Model.GISInfo.GISList[i].Tehsil_Cd)
-                                                @Html.DisplayFor(model => Model.GISInfo.GISList[i].Tehsil_NM)
-                                            </td>
-                                            <td>
+                                                        @Html.HiddenFor(model => Model.GISInfo.GISList[i].Tehsil_Cd)
+                                                        @Html.DisplayFor(model => Model.GISInfo.GISList[i].Tehsil_NM)
+                                                    </td>
+                                                    <td>
 
-                                                @Html.HiddenFor(model => Model.GISInfo.GISList[i].Blk_Cd)
-                                                @Html.DisplayFor(model => Model.GISInfo.GISList[i].Block_NM)
-                                            </td>
-                                            <td>
-                                                @Html.HiddenFor(model => Model.GISInfo.GISList[i].Gp_Cd)
-                                                @Html.DisplayFor(model => Model.GISInfo.GISList[i].Gp_NM)
-                                            </td>
-                                            <td>
-                                                @Html.HiddenFor(model => Model.GISInfo.GISList[i].Vlg_Cd)
-                                                @Html.DisplayFor(model => Model.GISInfo.GISList[i].Village_NM)
-                                            </td>
-                                            <td>
-                                                @Html.HiddenFor(model => Model.GISInfo.GISList[i].areaName)
-                                                @Html.DisplayFor(model => Model.GISInfo.GISList[i].areaName)
-                                            </td>
-                                            <td>
-                                                @Html.TextAreaFor(model => Model.GISInfo.GISList[i].KhasraNo)
-                                            </td>
-                                        </tr>
+                                                        @Html.HiddenFor(model => Model.GISInfo.GISList[i].Blk_Cd)
+                                                        @Html.DisplayFor(model => Model.GISInfo.GISList[i].Block_NM)
+                                                    </td>
+                                                    <td>
+                                                        @Html.HiddenFor(model => Model.GISInfo.GISList[i].Gp_Cd)
+                                                        @Html.DisplayFor(model => Model.GISInfo.GISList[i].Gp_NM)
+                                                    </td>
+                                                    <td>
+                                                        @Html.HiddenFor(model => Model.GISInfo.GISList[i].Vlg_Cd)
+                                                        @Html.DisplayFor(model => Model.GISInfo.GISList[i].Village_NM)
+                                                    </td>
+                                                    <td>
+                                                        @Html.HiddenFor(model => Model.GISInfo.GISList[i].areaName)
+                                                        @Html.DisplayFor(model => Model.GISInfo.GISList[i].areaName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.TextAreaFor(model => Model.GISInfo.GISList[i].KhasraNo)
+                                                    </td>
+                                                </tr>
                                             }
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+
                             </div>
 
-                        </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            @Html.TextBoxFor(s => s.GISInfo.AreaInHecture, new { @class = "form-control", @required = "required", @number = "number", @readonly = "readonly" })
+                                            @Html.ValidationMessageFor(s => s.GISInfo.AreaInHecture)
+                                            @*<input type="text" class="form-control" name="Code" ng-model="Code" required />*@
+                                            <label class="form-label">Area (In Hectare)</label>
+                                        </div>
 
-                        <div class="col-sm-12">
-                            <div class="col-sm-4">
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        @Html.TextBoxFor(s => s.GISInfo.AreaInHecture, new { @class = "form-control", @required = "required", @number = "number", @readonly = "readonly" })
-                                        @Html.ValidationMessageFor(s => s.GISInfo.AreaInHecture)
-                                        @*<input type="text" class="form-control" name="Code" ng-model="Code" required />*@
-                                        <label class="form-label">Area (In Hectare)</label>
                                     </div>
-
                                 </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        @Html.TextBoxFor(s => s.GISInfo.Lat, new { @class = "form-control", @required = "required", @readonly = "readonly" })
-                                        @Html.ValidationMessageFor(s => s.GISInfo.Lat)
-                                        <label class="form-label">Latitude</label>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            @Html.TextBoxFor(s => s.GISInfo.Lat, new { @class = "form-control", @required = "required", @readonly = "readonly" })
+                                            @Html.ValidationMessageFor(s => s.GISInfo.Lat)
+                                            <label class="form-label">Latitude</label>
+                                        </div>
+
                                     </div>
-
                                 </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        @Html.TextBoxFor(s => s.GISInfo.Long, new { @class = "form-control", @required = "required", @readonly = "readonly" })
-                                        @Html.ValidationMessageFor(s => s.GISInfo.Long)
-                                        <label class="form-label">Longitude</label>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            @Html.TextBoxFor(s => s.GISInfo.Long, new { @class = "form-control", @required = "required", @readonly = "readonly" })
+                                            @Html.ValidationMessageFor(s => s.GISInfo.Long)
+                                            <label class="form-label">Longitude</label>
+                                        </div>
+
                                     </div>
-
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="col-sm-4">
-                                <div class="form-group form-float ">
-                                    <div class="form-line">
-                                        @Html.TextBoxFor(s => s.GISInfo.WaterSource, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(s => s.GISInfo.WaterSource)
-                                        <label class="form-label">Water Source</label>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float ">
+                                        <div class="form-line">
+                                            @Html.TextBoxFor(s => s.GISInfo.WaterSource, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(s => s.GISInfo.WaterSource)
+                                            <label class="form-label">Water Source</label>
+                                        </div>
+
                                     </div>
-
                                 </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        @Html.TextBoxFor(s => s.GISInfo.NearestWaterSource, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(s => s.GISInfo.NearestWaterSource)
-                                        <label class="form-label">Nearest Water Source(Kms.)</label>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            @Html.TextBoxFor(s => s.GISInfo.NearestWaterSource, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(s => s.GISInfo.NearestWaterSource)
+                                            <label class="form-label">Nearest Water Source(Kms.)</label>
+                                        </div>
+
                                     </div>
-
                                 </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        @Html.TextBoxFor(s => s.GISInfo.NearestForestSource, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(s => s.GISInfo.NearestForestSource)
-                                        <label class="form-label">Nearest Forest boundary(Kms.)</label>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            @Html.TextBoxFor(s => s.GISInfo.NearestForestSource, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(s => s.GISInfo.NearestForestSource)
+                                            <label class="form-label">Nearest Forest boundary(Kms.)</label>
+                                        </div>
+
                                     </div>
-
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="col-sm-4">
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        @Html.TextBoxFor(s => s.GISInfo.WidelifyZone, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(s => s.GISInfo.WidelifyZone)
-                                        <label class="form-label">Wildlife Sanctuary/NP/ES Zone</label>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            @Html.TextBoxFor(s => s.GISInfo.WidelifyZone, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(s => s.GISInfo.WidelifyZone)
+                                            <label class="form-label">Wildlife Sanctuary/NP/ES Zone</label>
+                                        </div>
+
                                     </div>
-
                                 </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        @Html.TextBoxFor(s => s.GISInfo.ForestInHactare, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(s => s.GISInfo.ForestInHactare)
-                                        <label class="form-label">Density of Forest (In Hectare)</label>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            @Html.TextBoxFor(s => s.GISInfo.ForestInHactare, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(s => s.GISInfo.ForestInHactare)
+                                            <label class="form-label">Density of Forest (In Hectare)</label>
+                                        </div>
+
                                     </div>
-
                                 </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group form-float">
-                                    <div class="form-line">
-                                        @Html.TextBoxFor(s => s.GISInfo.FeesAmount, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(s => s.GISInfo.FeesAmount)
-                                        <label class="form-label">Fee Amount (in INR)</label>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            @Html.TextBoxFor(s => s.GISInfo.FeesAmount, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(s => s.GISInfo.FeesAmount)
+                                            <label class="form-label">Fee Amount (in INR)</label>
+                                        </div>
+
                                     </div>
-
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="col-sm-4">
-                                <div class="form-group form-float">
-                                    <div class="form">
-                                        Whether the Area Falls in Aravali Hills
+                            <div class="col-sm-12">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form">
+                                            Whether the Area Falls in Aravali Hills
 
-                                        @Html.RadioButtonFor(d => d.GISInfo.ISAravaliHills, 1, new { @checked = "checked" })
-                                        <label for="radio_1">YES</label>
-                                        @Html.RadioButtonFor(d => d.GISInfo.ISAravaliHills, 2)
-                                        <label for="radio_2">NO</label>
+                                            @Html.RadioButtonFor(d => d.GISInfo.ISAravaliHills, 1, new { @checked = "checked" })
+                                            <label for="radio_1">YES</label>
+                                            @Html.RadioButtonFor(d => d.GISInfo.ISAravaliHills, 2)
+                                            <label for="radio_2">NO</label>
+                                        </div>
+
                                     </div>
-
                                 </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group form-float">
-                                    <div class="form">
-                                        Whether the area is a Part of Forest Land
-                                        @Html.RadioButtonFor(d => d.GISInfo.ISForestLand, 1, new { @checked = "checked" })
-                                        <label for="radio_1">YES</label>
-                                        @Html.RadioButtonFor(d => d.GISInfo.ISForestLand, 2)
-                                        <label for="radio_2">NO</label>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form">
+                                            Whether the area is a Part of Forest Land
+                                            @Html.RadioButtonFor(d => d.GISInfo.ISForestLand, 1, new { @checked = "checked" })
+                                            <label for="radio_1">YES</label>
+                                            @Html.RadioButtonFor(d => d.GISInfo.ISForestLand, 2)
+                                            <label for="radio_2">NO</label>
+                                        </div>
+
                                     </div>
-
                                 </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group form-float">
-                                    <div class="form">
-                                        Whether the Area Falls in Plantation Area
-                                        @Html.RadioButtonFor(d => d.GISInfo.ISPlantationArea, 1, new { @checked = "checked" })
-                                        <label for="radio_1">YES</label>
-                                        @Html.RadioButtonFor(d => d.GISInfo.ISPlantationArea, 2)
-                                        <label for="radio_2">NO</label>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form">
+                                            Whether the Area Falls in Plantation Area
+                                            @Html.RadioButtonFor(d => d.GISInfo.ISPlantationArea, 1, new { @checked = "checked" })
+                                            <label for="radio_1">YES</label>
+                                            @Html.RadioButtonFor(d => d.GISInfo.ISPlantationArea, 2)
+                                            <label for="radio_2">NO</label>
+                                        </div>
+
                                     </div>
-
                                 </div>
                             </div>
-                        </div>
-                    </fieldset>
-                    <h3>Required Information</h3>
-                    <fieldset>
-                        <div class="col-sm-4">
-                            <div class="form-group form-float">
-                                <div class="form-line">
-                                    @Html.DropDownListFor(model => model.ApplicantType, (IEnumerable<SelectListItem>)TempData["ApplicantType"], "--Select--", new { @class = "form-control show-tick", @id = "ApplicantType" })
+                        </fieldset>
+                        <h3>Required Information</h3>
+                        <fieldset>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            @Html.DropDownListFor(model => model.ApplicantType, (IEnumerable<SelectListItem>)TempData["ApplicantType"], "--Select--", new { @class = "form-control", @id = "ApplicantType", @required = "required" })
+                                            @Html.ValidationMessageFor(s => s.ApplicantType)
+                                        </div>
+
+                                    </div>
                                 </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            @Html.TextBoxFor(s => s.PerposedAreaInHacture, new { @class = "form-control", @required = "required" })
+                                            @Html.ValidationMessageFor(s => s.PerposedAreaInHacture)
+                                            <label class="form-label">Perposed Area (In Hectare)</label>
+                                        </div>
 
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group form-float">
-                                <div class="form-line">
-                                    @Html.TextBoxFor(s => s.PerposedAreaInHacture, new { @class = "form-control", @required = "required" })
-                                    @Html.ValidationMessageFor(s => s.PerposedAreaInHacture)
-                                    <label class="form-label">Perposed Area (In Hectare)</label>
+                                    </div>
                                 </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            @Html.TextBoxFor(s => s.NoOfTreePerposedArea, new { @class = "form-control", @required = "required", @number = "number" })
+                                            @Html.ValidationMessageFor(s => s.NoOfTreePerposedArea)
+                                            <label class="form-label">Number of Trees in Proposed Area</label>
+                                        </div>
 
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group form-float">
-                                <div class="form-line">
-                                    @Html.TextBoxFor(s => s.NoOfTreePerposedArea, new { @class = "form-control", @required = "required", @number = "number" })
-                                    @Html.ValidationMessageFor(s => s.NoOfTreePerposedArea)
-                                    <label class="form-label">Number of Trees in Proposed Area</label>
+                                    </div>
                                 </div>
-
                             </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="row clearfix js-sweetalert">
-                                <table class="table table-bordered table-striped table-hover dataTable js-exportable fix-tbl">
-                                    <thead>
-                                        <tr>
-                                            <th>Species Name</th>
-                                            <th>Number</th>
-                                        </tr>
-                                    </thead>
+                            <div class="col-sm-12">
+                                <div class="row clearfix js-sweetalert">
+                                    <table class="table table-bordered table-striped table-hover dataTable js-exportable fix-tbl">
+                                        <thead>
+                                            <tr>
+                                                <th>Species Name</th>
+                                                <th>Number</th>
+                                            </tr>
+                                        </thead>
 
-                                    <tbody>
-                                        @for (int j = 0; j < Model.PlantDetail.Count(); j++)
+                                        <tbody>
+                                            @for (int j = 0; j < Model.PlantDetail.Count(); j++)
                                             {
-                                        <tr>
-                                            <td>
-                                                @Model.PlantDetail[j].PlantName
-                                                @Html.HiddenFor(model => model.PlantDetail[j].ID)
-                                            </td>
-                                            <td>@Html.TextBoxFor(model => model.PlantDetail[j].PlantNumber, new { @class = "form-control" })</td>
-                                        </tr>
+                                                <tr>
+                                                    <td>
+                                                        @Model.PlantDetail[j].PlantName
+                                                        @Html.HiddenFor(model => model.PlantDetail[j].ID)
+                                                    </td>
+                                                    <td>@Html.TextBoxFor(model => model.PlantDetail[j].PlantNumber, new { @class = "form-control" })</td>
+                                                </tr>
                                             }
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group form-float">
-                                <div class="form-line">
-                                    Revenue Map-Signed By Tehsildar:
-                                    @Html.RadioButtonFor(d => d.IsTehsildar, 1, new { @checked = "checked" })
-                                    <label for="radio_1">YES</label>
-                                    @Html.RadioButtonFor(d => d.IsTehsildar, 2)
-                                    <label for="radio_2">NO</label>
+                                        </tbody>
+                                    </table>
                                 </div>
 
                             </div>
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="form-group form-float">
-                                <div class="form-line">
-                                    <textarea class="form-control no-resize" placeholder="Please type what you want..."></textarea>
-                                </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            Revenue Map-Signed By Tehsildar:
+                                            @Html.RadioButtonFor(d => d.IsTehsildar, 1, new { @checked = "checked" })
+                                            <label for="radio_1">YES</label>
+                                            @Html.RadioButtonFor(d => d.IsTehsildar, 2)
+                                            <label for="radio_2">NO</label>
+                                        </div>
 
-                            </div>
-                        </div>
-                    </fieldset>
-                    <h3>Upload Required Documents</h3>
-                    <fieldset class="dropzonefile">
-                        <div class="row clearfix">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="card">
-                                    <div class="header">
-                                        <h2>
-                                            Revenue Record
-                                        </h2>
                                     </div>
-                                    <div class="body">
-                                        <div class="dz-message">
-                                            <div class="drag-icon-cph">
-                                                <i class="material-icons">touch_app</i>
-                                            </div>
-                                            <h3>Drop files here or click to upload.</h3>
-                                            <em>(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</em>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            @Html.TextAreaFor(s => s.ProjectDescription, new { @class= "form-control no-resize", @placeholder = "Please type what you want..." })
                                         </div>
-                                        <div class="fallback">
-                                            <input name="Revenue" type="file" multiple />
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row clearfix">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="card">
-                                    <div class="header">
-                                        <h2>
+                        </fieldset>
+                        <h3>Upload Required Documents</h3>
+                        <fieldset>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+
+                                        <div class="form">
+                                            Revenue Record:*
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form">
+                                            <input type="file" name="RevenueRecord" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+
+                                        <div class="form">
                                             Revenue Map:*
-                                        </h2>
-                                    </div>
-                                    <div class="body">
-                                        <div class="dz-message">
-                                            <div class="drag-icon-cph">
-                                                <i class="material-icons">touch_app</i>
-                                            </div>
-                                            <h3>Drop files here or click to upload.</h3>
-                                            <em>(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</em>
                                         </div>
-                                        <div class="fallback">
-                                            <input name="Map" type="file" multiple />
-                                        </div>
+
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row clearfix">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="card">
-                                    <div class="header">
-                                        <h2>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form">
+                                            <input type="file" name="RevenueMap" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form">
+                                            
+                                        </div>
+
+                                    </div>
+                                </div>
+                                </div>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form">
                                             Detailed Project Report (DPR):
-                                        </h2>
+                                        </div>
+
                                     </div>
-                                    <div class="body">
-                                        <form action="/" id="frmFileUpload" class="dropzone" method="post" enctype="multipart/form-data">
-                                            <div class="dz-message">
-                                                <div class="drag-icon-cph">
-                                                    <i class="material-icons">touch_app</i>
-                                                </div>
-                                                <h3>Drop files here or click to upload.</h3>
-                                                <em>(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</em>
-                                            </div>
-                                            <div class="fallback">
-                                                <input name="DPR" type="file" multiple />
-                                            </div>
-                                        </form>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form">
+                                            <input type="file" name="DetailedProjectReport" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group form-float">
+                                        <div class="form">
+                                            
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </fieldset>
+
+                        </fieldset>
 
                     }
-
-                    <div class="row clearfix jsdemo-notification-button">
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
-                            <button type="button" class="btn bg-red btn-block waves-effect" id="test" data-placement-from="bottom" data-placement-align="left"
-                                    data-animate-enter="" data-animate-exit="" data-color-name="bg-red">
-                                RED
-                            </button>
-                        </div>
-                    </div>
 
                 </div>
             </div>
@@ -544,7 +551,7 @@
 <!-- Dropzone Plugin Js -->
 <script src="../../plugins/dropzone/dropzone.js"></script>
 <!-- Jquery Validation Plugin Css -->
-<script src="../../plugins/jquery-validation/jquery.validate.js"></script>
+@*<script src="../../plugins/jquery-validation/jquery.validate.js"></script>*@
 <!-- JQuery Steps Plugin Js -->
 <script src="../../plugins/jquery-steps/jquery.steps.js"></script>
 <!-- Sweet Alert Plugin Js -->
@@ -564,8 +571,6 @@
 
 <script type="text/javascript">
     function Begin() {
-        alert("a");
-        hello();
         $(".page-loader-wrapper").attr("style", "display:block");
 
     }
@@ -611,6 +616,17 @@
         showBasicMessage();
     }
 
-   
+
 
 </script>
+
+
+
+
+
+
+
+
+
+
+

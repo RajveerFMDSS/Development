@@ -7479,6 +7479,7 @@
     <Folder Include="AngularApplication\CommanServices\CommanController\" />
     <Folder Include="AngularApplication\CommanServices\CommanService\" />
     <Folder Include="App_Data\" />
+    <Folder Include="DocumentsUpload\NOC_Citizen\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>

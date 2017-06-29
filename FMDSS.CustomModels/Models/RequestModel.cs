@@ -32,13 +32,22 @@ namespace FMDSS.CustomModels.Models
             GISInfo.GISList = new List<GISInformationList>();
             PlantDetail = new List<PlantDetails>();
         }
+
+        [Required(ErrorMessage ="Please Select Applicant Type")]
         public string ApplicantType { get; set; }
+        [Required]
         public string PerposedAreaInHacture { get; set; }
+        [Required]
         public string NoOfTreePerposedArea { get; set; }
+        [Required]
         public int IsTehsildar { get; set; }
+        [Required]
         public string ProjectDescription { get; set; }
+    
         public string RevenueRecordFile { get; set; }
+   
         public string RevenueMapFile { get; set; }
+
         public string DetailedProjectReportFile { get; set; }
 
         public GISInformation GISInfo { get; set; }

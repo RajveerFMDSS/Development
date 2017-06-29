@@ -2,6 +2,7 @@
 using FMDSS.WEB.Repository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -51,13 +52,13 @@ namespace FMDSS.WEB.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string NOCPurpose,string NOCType, FormCollection form)
+        public ActionResult Index(string NOCPurpose, string NOCType, FormCollection form)
         {
             TempData.Keep("FixedLandNocTypeList");
             TempData.Keep("FixedLandPermissionTypesList");
             NOCModel model = new NOCModel();
 
-            model.GISInfo.NOCPurpose =Convert.ToInt32(NOCPurpose);
+            model.GISInfo.NOCPurpose = Convert.ToInt32(NOCPurpose);
             model.GISInfo.NOCType = Convert.ToInt32(NOCType);
             model.PlantDetail = (List<PlantDetails>)TempData["PlantDetail"];
 
@@ -111,7 +112,7 @@ namespace FMDSS.WEB.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> SaveNocInformation(NOCModel Model)
+        public async Task<ActionResult> SaveNocInformation(NOCModel Model, HttpPostedFileBase RevenueRecord, HttpPostedFileBase RevenueMap, HttpPostedFileBase DetailedProjectReport)
         {
             NOCModuleRepository repo = new NOCModuleRepository();
             StringResponse response = new StringResponse();
@@ -119,6 +120,28 @@ namespace FMDSS.WEB.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    string FileFullName = string.Empty;
+                    string FilePath = "~/DocumentsUpload/NOC_Citizen"; 
+                    if (RevenueRecord != null)
+                    {
+                            FileFullName = DateTime.Now.Ticks + "_" + RevenueRecord.FileName;
+                            Model.RevenueRecordFile = Path.Combine(FilePath, FileFullName);
+                            RevenueRecord.SaveAs(Server.MapPath(FilePath + FileFullName));
+                    }
+
+                    if (RevenueMap != null)
+                    {
+                            FileFullName = DateTime.Now.Ticks + "_" + RevenueMap.FileName;
+                            Model.RevenueMapFile = Path.Combine(FilePath, FileFullName);
+                            RevenueMap.SaveAs(Server.MapPath(FilePath + FileFullName));
+                    }
+                    if (DetailedProjectReport != null)
+                    {
+                        FileFullName = DateTime.Now.Ticks + "_" + DetailedProjectReport.FileName;
+                        Model.DetailedProjectReportFile = Path.Combine(FilePath, FileFullName);
+                        DetailedProjectReport.SaveAs(Server.MapPath(FilePath + FileFullName));
+                    }
+
                     response = await repo.SaveNOCByCitizen(Model);
                 }
 
