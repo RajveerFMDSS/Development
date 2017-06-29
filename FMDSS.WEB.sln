@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMDSS.WEB", "FMDSS.WEB\FMDSS.WEB.csproj", "{C32B7480-3FCB-4426-B807-6D7B5C345EFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMDSS.WEB.Tests", "FMDSS.WEB.Tests\FMDSS.WEB.Tests.csproj", "{498C3052-B1D2-4354-B197-35979DFB54CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMDSS.Models", "FMDSS.Models\FMDSS.Models.csproj", "{76AE05A0-A7A5-45EA-91B3-B1FEDEE3500E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMDSS.Interface", "FMDSS.Interface\FMDSS.Interface.csproj", "{2CD90936-2919-4C6A-AEA0-3EB85D2B776F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMDSS.Infrastructure", "FMDSS.Infrastructure\FMDSS.Infrastructure.csproj", "{C0EFE9EC-26AF-4B5F-8329-0014F388196F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMDSS.API", "FMDSS.API\FMDSS.API.csproj", "{065614B3-CCA7-42DB-9253-E27515912A77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMDSS.CustomModels", "FMDSS.CustomModels\FMDSS.CustomModels.csproj", "{82946C3F-EE96-434F-9420-0CE137935C26}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C32B7480-3FCB-4426-B807-6D7B5C345EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C32B7480-3FCB-4426-B807-6D7B5C345EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C32B7480-3FCB-4426-B807-6D7B5C345EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C32B7480-3FCB-4426-B807-6D7B5C345EFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{498C3052-B1D2-4354-B197-35979DFB54CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{498C3052-B1D2-4354-B197-35979DFB54CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{498C3052-B1D2-4354-B197-35979DFB54CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{498C3052-B1D2-4354-B197-35979DFB54CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76AE05A0-A7A5-45EA-91B3-B1FEDEE3500E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76AE05A0-A7A5-45EA-91B3-B1FEDEE3500E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76AE05A0-A7A5-45EA-91B3-B1FEDEE3500E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76AE05A0-A7A5-45EA-91B3-B1FEDEE3500E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CD90936-2919-4C6A-AEA0-3EB85D2B776F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD90936-2919-4C6A-AEA0-3EB85D2B776F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CD90936-2919-4C6A-AEA0-3EB85D2B776F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CD90936-2919-4C6A-AEA0-3EB85D2B776F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0EFE9EC-26AF-4B5F-8329-0014F388196F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0EFE9EC-26AF-4B5F-8329-0014F388196F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0EFE9EC-26AF-4B5F-8329-0014F388196F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0EFE9EC-26AF-4B5F-8329-0014F388196F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{065614B3-CCA7-42DB-9253-E27515912A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{065614B3-CCA7-42DB-9253-E27515912A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{065614B3-CCA7-42DB-9253-E27515912A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{065614B3-CCA7-42DB-9253-E27515912A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82946C3F-EE96-434F-9420-0CE137935C26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82946C3F-EE96-434F-9420-0CE137935C26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82946C3F-EE96-434F-9420-0CE137935C26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82946C3F-EE96-434F-9420-0CE137935C26}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

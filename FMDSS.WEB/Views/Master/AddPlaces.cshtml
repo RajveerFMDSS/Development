@@ -1,0 +1,352 @@
+﻿
+@{
+    ViewBag.Title = "AddPlaces";
+    Layout = "~/Views/Shared/_LayoutMatarial.cshtml";
+}
+<script src="~/AngularApplication/MasterModule/MasterServices.js"></script>
+<script src="~/AngularApplication/MasterModule/PlaceMaster/PlaceServices.js"></script>
+<script src="~/AngularApplication/MasterModule/PlaceMaster/PlaceCtrl.js"></script>
+
+<script type="text/javascript">
+    function ShowList(itm)
+    {
+        if(itm==0)
+        {
+            $(".AddPage").attr("style", "display:block");
+            $(".List").attr("style", "display:none");
+        }
+        else
+        {
+            $(".List").attr("style", "display:block");
+            $(".AddPage").attr("style", "display:none");
+        }
+    }
+
+    setInterval(function () {
+        var classes = $("#submitbtn").attr("class");
+        if (classes == 'btn btn-primary waves-effect')
+        {
+            $("#submitbtn").removeClass("btn btn-primary waves-effect");
+            $("#submitbtn").addClass("btn btn-success waves-effect");
+        }
+        else
+        {
+            $("#submitbtn").removeClass("btn btn-success waves-effect");
+            $("#submitbtn").addClass("btn btn-primary waves-effect");
+
+        }
+        if (classes ==='undefined')
+        {
+            $("#submitbtn").addClass("btn btn-primary waves-effect");
+        }
+    }, 2000);
+</script>
+<div class="container-fluid" ng-controller="MasterPlaceController">
+
+    <div class="row clearfix List">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        Place List
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle btn bg-cyan waves-effect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                                <i class="material-icons">swap_horiz</i>
+                            </a>
+
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:ShowList(0);">Add Place</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="body">
+                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                        <thead>
+                            <tr>
+                                <th>Sr No.</th>
+                                <th>District Name</th>
+                                <th>Place Name</th>
+                                <th>Category</th>
+                                <th>Ticket Allocated Per Shift</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr ng-repeat="itm in GetPlaceLists">
+                                <td><span>{{$index+1}}</span></td>
+                                <td><span ng-bind="itm.DIST_NAME" data-ng-click="GetPlaceDataById('8')"></span></td>
+                                <td><span ng-bind="itm.PlaceName"></span></td>
+                                <td><span ng-bind="itm.Category"></span></td>
+                                <td><span ng-bind="itm.TicketAllocatedPerShift"></span></td>
+                                <td><span ng-bind="itm.IsActive"></span></td>
+                                <td>
+                                    <div class="demo-google-material-icon" ng-click="PlaceDataByID('8')"> <i class="material-icons">edit</i> <span class="icon-name"></span> </div>
+                                    @*<input type="button" value="Update" ng-click="PlaceDataByID('8')" />*@
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Basic Validation -->
+    <div class="row clearfix AddPage" style="display:none">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>  Add Place</h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle btn bg-cyan waves-effect" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                                <i class="material-icons">swap_horiz</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="javascript:ShowList(1);">Add Place</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="body">
+                    <form id="form_validation" name="form_validation" method="POST">
+
+                        <div class="row clearfix">
+                            <div class="col-sm-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+
+                                        <select class="form-control show-tick" ng-model="DIST_CODE" id="DIST_CODE" name="DIST_CODE" required>
+
+                                            <option value="">Select District</option>
+                                            <option ng-repeat="t in getAllDistrictsList" value="{{t.DIST_CODE}}">{{t.DIST_NAME}}</option>
+                                        </select>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group form-float">
+                                    @*<span class="input-group-addon">
+                                            <i class="material-icons">person</i>
+                                        </span>*@
+                                    <div class="form-line">
+
+                                        <input type="text" class="form-control" name="PlaceName" ng-model="PlaceName" required />
+                                        <label class="form-label">Place Name</label>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" ng-model="Category" name="Category" required>
+                                            <option value="">Select Category</option>
+                                            <option value="Conservation Reserve">Conservation Reserve</option>
+                                            <option value="National Park">National Park</option>
+                                            <option value="Wildlife Santuaries">Wildlife Santuaries</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-sm-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="Code" ng-model="Code" required />
+                                        <label class="form-label">Place Code</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" ng-model="ShiftTypeID" name="ShiftTypeID" required>
+                                            <option value="">Select Shift</option>
+                                            <option data-ng-repeat="t in GetShiftTypeLists" value="t.Value">{{t.Text}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" ng-model="PlaceDisplayIDs" name="PlaceDisplayIDs" required>
+                                            <option value="">Select Place</option>
+                                            <option value="1">Camping (Citizen)</option>
+
+                                            <option data-ng-repeat="t in GetPlaceDisplayLists" value="t.Value">{{t.Text}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-sm-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="Accommodation" ng-model="Accommodation" required />
+                                        <label class="form-label">Accoumation</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" ng-model="IsSafari" name="IsSafari" required>
+                                            <option value="">Select Safari</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" ng-model="IsZone" name="IsZone" required>
+                                            <option value="">Select Zone</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-sm-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" class="form-control" name="TicketAllocatedPerShift" ng-model="TicketAllocatedPerShift" required />
+                                        <label class="form-label">Ticket Allocated Per Shift</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" class="form-control" name="MaxBookingDuration" ng-model="MaxBookingDuration" required />
+                                        <label class="form-label">Booking Duration</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <div class="form-line form-float">
+                                        <input type="number" class="form-control" name="Tax" ng-model="Tax" required />
+                                        <label class="form-label">Tax Rate</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-sm-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" class="form-control" name="EmitraCharges" ng-model="EmitraCharges" required />
+                                        <label class="form-label">Emitra Charges</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="ContactPerson" ng-model="ContactPerson" required />
+                                        <label class="form-label">Contact Person Name</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" name="Address" ng-model="Address" required />
+                                        <label class="form-label">Contact Person Address</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="col-sm-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" class="form-control" name="PhoneNo" ng-model="PhoneNo" required />
+                                        <label class="form-label">Contact Person Phone No.</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input type="number" class="form-control" name="Boarding_Point" ng-model="Boarding_Point" required />
+                                        <label class="form-label">Boarding Point</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+
+                                    <div class="demo-switch-title">Status</div>
+                                    <div class="switch">
+                                        <label><input type="checkbox" checked ng-init="Status=Status || 0" ng-model="Status"><span class="lever switch-col-green"></span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary waves-effect" id="submitbtn" ng-click="AddAndUpdatePlace()" type="submit">SUBMIT</button>
+                        <button class="btn btn-warning waves-effect" type="reset">RESET</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
